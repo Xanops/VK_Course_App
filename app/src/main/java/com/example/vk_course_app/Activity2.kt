@@ -18,17 +18,26 @@ class Activity2 : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MainActivity::class.java
+            VK_Course_AppTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Greeting(
+                        text_from_TextField = intent.getStringExtra("inf"),
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
+            }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun Greeting(text_from_TextField: String?, modifier: Modifier = Modifier) {
+    if (text_from_TextField != null) {
+        Text(
+            text = text_from_TextField,
+            modifier = modifier
+        )
+    }
 }
 
 @Preview(showBackground = true)
